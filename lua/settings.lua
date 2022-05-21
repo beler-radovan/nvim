@@ -9,6 +9,8 @@ opt.fileencoding = 'utf-8'
 opt.tabstop = 4
 opt.shiftwidth = 4
 opt.expandtab = true
+opt.ignorecase = true
+opt.smartcase = true
 
 -- Shortcuts
 local opts = {silent = true, remap = false}

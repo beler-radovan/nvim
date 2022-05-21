@@ -1,4 +1,5 @@
 require('plugins')
 require('settings')
+require('statusline')
 require('tree-sitter-setup')
 require('vscode-theme-setup')

@@ -11,6 +11,7 @@ opt.shiftwidth = 4
 opt.expandtab = true
 opt.ignorecase = true
 opt.smartcase = true
+opt.laststatus = 3
 
 -- Shortcuts
 local opts = {silent = true, remap = false}

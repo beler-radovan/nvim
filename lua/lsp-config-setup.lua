@@ -14,6 +14,10 @@ local on_attach = function(_, bufnr)
     map('n', 'gda', vim.lsp.buf.code_action, {buffer = bufnr})
 end
 
+require'lspconfig'.clangd.setup{
+    on_attach = on_attach,
+}
+
 require'lspconfig'.sumneko_lua.setup {
     on_attach = on_attach,
 

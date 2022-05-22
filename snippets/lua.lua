@@ -35,7 +35,7 @@ return {
         'until $2\n',
         '$0'
     })),
-    parse ('t', table.concat({
+    parse ('ta', table.concat({
         '$1 = {\n',
         '   $2\n',
         '}\n',
@@ -49,5 +49,8 @@ return {
     })),
     parse ('req', table.concat({
         'require(\'$1\')$0',
+    })),
+    parse ('lo', table.concat({
+        'local $1 = $0',
     })),
 }

@@ -7,8 +7,11 @@ cmp.setup({
         ['<a-n>'] = cmp.mapping.select_next_item(),
         ['<a-p>'] = cmp.mapping.select_prev_item(),
         ['<a-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        ['<a-y>'] = cmp.mapping.complete(),
+        ['<c-y>'] = cmp.mapping.complete(),
+        ['<CR>'] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
+        }),
     },
     sources = {
         {name = 'nvim_lua'},

@@ -7,4 +7,5 @@ return require('packer').startup(function()
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'Mofiqul/vscode.nvim'
     use 'kyazdani42/nvim-web-devicons'
+    use 'L3MON4D3/LuaSnip'
 end)

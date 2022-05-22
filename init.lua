@@ -1,3 +1,4 @@
+require('luasnip-setup')
 require('plugins')
 require('settings')
 require('statusline')

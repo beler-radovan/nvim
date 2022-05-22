@@ -56,7 +56,7 @@ local separators = {
 
 
 local function getMode()
-    currentMode = api.nvim_get_mode()['mode']
+    local currentMode = api.nvim_get_mode()['mode']
     return modes[currentMode]
 end
 
@@ -65,7 +65,12 @@ function getStatusLine()
     statusLine = statusLine .. color.mode
     statusLine = statusLine .. ' ' .. getMode() .. ' '
     statusLine = statusLine .. color.normal
-
+    statusLine = statusLine .. ' %t'
+    statusLine = statusLine .. ' %m '
+    statusLine = statusLine .. '%='
+    statusLine = statusLine .. '%y'
+    statusLine = statusLine .. ' |'
+    statusLine = statusLine .. ' %p%% '
     return statusLine
 end
 

@@ -1,23 +1,23 @@
 -- General settings
-local opt = vim.opt
-opt.relativenumber = true
-opt.splitright = true
-opt.splitbelow = true
-opt.swapfile = false
-opt.colorcolumn = '80'
-opt.fileencoding = 'utf-8'
-opt.tabstop = 4
-opt.shiftwidth = 4
-opt.expandtab = true
-opt.ignorecase = true
-opt.smartcase = true
-opt.laststatus = 3
+local set = vim.opt
+set.relativenumber = true
+set.splitright = true
+set.splitbelow = true
+set.swapfile = false
+set.colorcolumn = '80'
+set.fileencoding = 'utf-8'
+set.tabstop = 4
+set.shiftwidth = 4
+set.expandtab = true
+set.ignorecase = true
+set.smartcase = true
+set.laststatus = 3
 
 -- Shortcuts
 local opts = {silent = true, remap = false}
-local set = vim.keymap.set
-set('n', ',s', ':w<CR>', opts)
-set('n', ',q', ':wq<CR>', opts)
-set('n', ',e', ':q!<CR>', opts)
-set('n', ',w', '<C-w>w', opts)
-set('n', ',h', ':nohlsearch<CR>', opts)
+local map = vim.keymap.set
+map('n', ',s', ':w<CR>', opts)
+map('n', ',q', ':wq<CR>', opts)
+map('n', ',e', ':q!<CR>', opts)
+map('n', ',w', '<C-w>w', opts)
+map('n', ',h', ':nohlsearch<CR>', opts)

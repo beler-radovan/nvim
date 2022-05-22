@@ -21,3 +21,9 @@ map('n', ',q', ':wq<CR>', opts)
 map('n', ',e', ':q!<CR>', opts)
 map('n', ',w', '<C-w>w', opts)
 map('n', ',h', ':nohlsearch<CR>', opts)
+
+-- Tabs
+map('n', ',n', ':tabnew<CR>', opts)
+map('n', ',c', ':tabclose<CR>', opts)
+map('n', '<c-n>', ':tabnext<CR>', opts)
+map('n', '<c-p>', ':tabprev<CR>', opts)

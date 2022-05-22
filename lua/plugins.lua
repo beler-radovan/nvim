@@ -8,4 +8,5 @@ return require('packer').startup(function()
     use 'Mofiqul/vscode.nvim'
     use 'kyazdani42/nvim-web-devicons'
     use 'L3MON4D3/LuaSnip'
+    use 'neovim/nvim-lspconfig'
 end)

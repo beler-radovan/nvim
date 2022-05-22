@@ -47,4 +47,7 @@ return {
         '}\n',
         '$0'
     })),
+    parse ('req', table.concat({
+        'require(\'$1\')$0',
+    })),
 }

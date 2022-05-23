@@ -14,10 +14,10 @@ cmp.setup({
         }),
     },
     sources = {
+        {name = 'luasnip'},
         {name = 'nvim_lua'},
         {name = 'nvim_lsp'},
         {name = 'path'},
-        {name = 'luasnip'},
         {name = 'buffer', keyword_length = 5},
     },
     snippet = {

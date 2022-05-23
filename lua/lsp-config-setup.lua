@@ -14,12 +14,16 @@ local on_attach = function(_, bufnr)
     map('n', 'gda', vim.lsp.buf.code_action, {buffer = bufnr})
 end
 
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 require'lspconfig'.clangd.setup{
     on_attach = on_attach,
+    capabilities = capabilities
 }
 
 require'lspconfig'.sumneko_lua.setup {
     on_attach = on_attach,
+    capabilities = capabilities,
 
     settings = {
         Lua = {

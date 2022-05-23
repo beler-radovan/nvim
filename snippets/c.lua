@@ -2,7 +2,7 @@ return {
     parse ('main', table.concat({
         'int main() {\n',
         '    $0\n\n',
-        '   return 0;\n',
+        '    return 0;\n',
         '}',
     })),
     parse ('for', table.concat({

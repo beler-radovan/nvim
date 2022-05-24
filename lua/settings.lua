@@ -1,6 +1,7 @@
 -- General settings
 local set = vim.opt
 set.relativenumber = true
+set.number = true
 set.splitright = true
 set.splitbelow = true
 set.swapfile = false
@@ -12,6 +13,7 @@ set.expandtab = true
 set.ignorecase = true
 set.smartcase = true
 set.laststatus = 3
+set.showtabline = 2
 
 -- Shortcuts
 local opts = {silent = true, remap = false}

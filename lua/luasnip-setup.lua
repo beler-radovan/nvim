@@ -12,7 +12,8 @@ vim.keymap.set({'i', 's'}, '<a-j>',
             ls.expand_or_jump()
         end
     end,
-    {silent = true})
+    {silent = true}
+)
 
 vim.keymap.set({'i', 's'}, '<a-k>',
     function()
@@ -20,7 +21,17 @@ vim.keymap.set({'i', 's'}, '<a-k>',
             ls.jump(-1)
         end
     end,
-    {silent = true})
+    {silent = true}
+)
+
+vim.keymap.set({'i', 's'}, '<a-l>',
+    function()
+        if ls.choice_active() then
+            ls.change_choice(1)
+        end
+    end,
+    {silent = true}
+)
 
 vim.keymap.set({'n'}, ',,s', ':source ~/.config/nvim/lua/luasnip-setup.lua<CR>')
 

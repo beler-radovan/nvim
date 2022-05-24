@@ -1,56 +1,31 @@
+local ls = require "luasnip"
+local s = ls.s
+local i = ls.i
+local t = ls.text_node
+local c = ls.choice_node
+local fmt = require("luasnip.extras.fmt").fmt
+-- local rep = require("luasnip.extras").rep
+
 return {
-    parse ('fn', table.concat({
-        'function $1($2)\n',
-        '    $3\n',
-        'end\n',
-        '$0'
-    })),
-    parse ('lf', table.concat({
-        'local function $1($2)\n',
-        '    $3\n',
-        'end\n',
-        '$0'
-    })),
-    parse ('if', table.concat({
-        'if $1 then\n',
-        '    $2\n',
-        'end\n',
-        '$0'
-    })),
-    parse ('for', table.concat({
-        'for $1 do\n',
-        '    $2\n',
-        'end\n',
-        '$0'
-    })),
-    parse ('wh', table.concat({
-        'while $1 do\n',
-        '    $2\n',
-        'end\n',
-        '$0'
-    })),
-    parse ('rep', table.concat({
-        'repeat\n',
-        '    $1\n',
-        'until $2\n',
-        '$0'
-    })),
-    parse ('ta', table.concat({
-        '$1 = {\n',
-        '    $2\n',
-        '}\n',
-        '$0'
-    })),
-    parse ('lt', table.concat({
-        'local $1 = {\n',
-        '    $2\n',
-        '}\n',
-        '$0'
-    })),
-    parse ('req', table.concat({
-        'require(\'$1\')$0',
-    })),
-    parse ('lo', table.concat({
-        'local $1 = $0',
-    })),
+    s("req", fmt("local {} = require(\"{}\")",
+        {i(1), i(2)})
+    ),
+    s("fn", fmt(table.concat({
+        "function {}({})\n",
+        "    {}\n",
+        "end{}"}),
+        {i(1), i(2), i(3), i(4)})
+    ),
+    s("lf", fmt(table.concat({
+        "local function {}({})\n",
+        "    {}\n",
+        "end{}"}),
+        {i(1), i(2), i(3), i(4)})
+    ),
+    s("ta", fmt(table.concat({
+        "{}{} = {{\n",
+        "    {}\n",
+        "}}{}"}),
+        {c(1, {t"local ", t""}), i(2), i(3), i(4)})
+    ),
 }

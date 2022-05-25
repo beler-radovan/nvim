@@ -66,6 +66,12 @@ return {
         "until {}"}),
         {i(1), i(2)})
     ),
+    s("rv", fmt(table.concat({
+        "local {} = {}\n",
+        "{}\n",
+        "return {}"}),
+        {i(1), i(2), i(3), rep(1)})
+    ),
     -- Frequently used functions
     s("print", fmt("print({})", i(1))),
 }

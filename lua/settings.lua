@@ -30,3 +30,15 @@ map('n', ',n', ':tabnew<CR>', opts)
 map('n', ',c', ':tabclose<CR>', opts)
 map('n', '<c-n>', ':tabnext<CR>', opts)
 map('n', '<c-p>', ':tabprev<CR>', opts)
+
+local ts_utils = require("nvim-treesitter.ts_utils")
+function nodeType()
+    local node = ts_utils.get_node_at_cursor()
+    if node == nil then
+        print("No treesitter found")
+        return
+    end
+    print(node:type())
+end
+
+map('n', ',i', nodeType, opts)

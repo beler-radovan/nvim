@@ -5,6 +5,7 @@ return require('packer').startup(function()
         run = ':TSUpdate'
     }
     use 'nvim-treesitter/nvim-treesitter-textobjects'
+    use 'nvim-treesitter/playground'
     use 'Mofiqul/vscode.nvim'
     use 'kyazdani42/nvim-web-devicons'
     use 'L3MON4D3/LuaSnip'

@@ -7,8 +7,8 @@ cmp.setup({
         ['<a-n>'] = cmp.mapping.select_next_item(),
         ['<a-p>'] = cmp.mapping.select_prev_item(),
         ['<a-e>'] = cmp.mapping.abort(),
-        ['<c-y>'] = cmp.mapping.complete(),
-        ['<CR>'] = cmp.mapping.confirm({
+        ['<a-y>'] = cmp.mapping.complete(),
+        ['<a-;>'] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Insert,
             select = true,
         }),

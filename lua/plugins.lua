@@ -16,4 +16,5 @@ return require('packer').startup(function()
     use 'hrsh7th/cmp-nvim-lua'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'saadparwaiz1/cmp_luasnip'
+    use 'numToStr/Comment.nvim'
 end)

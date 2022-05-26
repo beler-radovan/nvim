@@ -1,8 +1,7 @@
 local opt = vim.opt
 local api = vim.api
 
-local modes = setmetatable(
-    {
+local modes = setmetatable({
         ['n'] = 'NORMAL',
         ['no'] = 'N-PENDING',
         ['nov'] = 'N-PENDING',
@@ -37,8 +36,7 @@ local modes = setmetatable(
         -- ['r?'] = '',
         -- ['!'] = '',
         ['t'] = 'TERMINAL',
-    },
-    {
+    }, {
         __index = function()
             return 'UNKNOWN'
         end
@@ -46,68 +44,65 @@ local modes = setmetatable(
 )
 
 local icons = {
-    rightFullSep = '',
-    rightHollowSep = '',
-    leftFullSep = '',
-    leftHollowSep = '',
+    right_full_sep = '',
+    right_hollow_sep = '',
+    left_full_sep = '',
+    left_hollow_sep = '',
 }
 
-local function setHighlight(groupName, fg, bg)
-    vim.cmd('highlight '..groupName..' guifg='..fg..' guibg='..bg)
-    return '%#' .. groupName .. '#'
+local function set_highlight(group_name, fg, bg)
+    vim.cmd('highlight '..group_name..' guifg='..fg..' guibg='..bg)
+    return '%#' .. group_name .. '#'
 end
 
-local function getColor()
+local function get_colors()
     local color = {}
     if vim.g.colors_name == 'vscode' then
-        local vscColors = require('vscode.colors').generate()
-        color.blue = setHighlight('Blue', vscColors.vscFront, vscColors.vscSelection)
-        color.blueSep = setHighlight('BlueSep', vscColors.vscSelection, vscColors.vscBack)
-        color.red = setHighlight('Red', vscColors.vscRed, vscColors.vscBack)
-        color.yellow = setHighlight('Yellow', vscColors.vscOrange, vscColors.vscBack)
-        color.none = setHighlight('None', vscColors.vscFront, vscColors.vscNone)
+        local vsc_colors = require('vscode.colors').generate()
+        color.blue = set_highlight('Blue', vsc_colors.vscFront, vsc_colors.vscSelection)
+        color.blue_sep = set_highlight('BlueSep', vsc_colors.vscSelection, vsc_colors.vscBack)
+        color.none = set_highlight('None', vsc_colors.vscFront, vsc_colors.vscNone)
     end
     return color
 end
 
-local function getMode()
-    local currentMode = api.nvim_get_mode()['mode']
-    return modes[currentMode]
+local function get_mode()
+    local current_mode = api.nvim_get_mode()['mode']
+    return modes[current_mode]
 end
 
-local function getFileType()
-    local fileType = vim.bo.filetype
-    if fileType == '' then
+local function get_file_type()
+    local file_type = vim.bo.filetype
+    if file_type == '' then
         return 'TEXT'
     else
         return '%Y'
     end
 end
 
-local function getEncoding()
+local function get_encoding()
     return vim.opt.fileencoding:get()
 end
 
-local function getDiagnostics()
+local function get_diagnostics()
+    local number_of_clients = #vim.lsp.get_active_clients(0)
+    if number_of_clients < 1 then
+        return nil
+    end
+
     local errors = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
     local warnings = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
     local hints = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
     local info = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
     local diagnostics = ''
-    diagnostics = diagnostics .. 'E:' .. #errors
-    diagnostics = diagnostics .. ' W:' .. #warnings
-    diagnostics = diagnostics .. ' I:' .. #info
-    diagnostics = diagnostics .. ' H:' .. #hints
+    diagnostics = diagnostics .. 'E' .. #errors
+    diagnostics = diagnostics .. '-W' .. #warnings
+    diagnostics = diagnostics .. '-I' .. #info
+    diagnostics = diagnostics .. '-H' .. #hints
     return diagnostics
 end
 
-local function lspClientAttached()
-    local numberOfClients = #vim.lsp.get_active_clients(0)
-    return numberOfClients > 0
-end
-
-
-local function getBranch()
+local function get_branch()
     -- redirect output from stderr to stdout, because popen reads output
     -- only from stdout
     local output = io.popen("git branch 2>&1", "r")
@@ -132,36 +127,37 @@ local function getBranch()
     return nil
 end
 
-function getStatusLine()
-    local color = getColor()
+function get_status_line()
+    local color = get_colors()
 
-    local statusLine = ''
-    statusLine = statusLine .. color.blue
-    statusLine = statusLine .. ' ' .. getMode() .. ' '
-    statusLine = statusLine .. color.blueSep
-    statusLine = statusLine .. icons.rightFullSep
-    statusLine = statusLine .. color.none
-    -- print LSP diagnostics if at least one LSP client is attached
-    -- to the current buffer
-    if lspClientAttached() then
-        statusLine = statusLine .. ' ' .. getDiagnostics() .. ' '
-        statusLine = statusLine .. icons.rightHollowSep
+    local status_line = ''
+    status_line = status_line .. color.blue
+    status_line = status_line .. ' ' .. get_mode() .. ' '
+    status_line = status_line .. color.blue_sep
+    status_line = status_line .. icons.right_full_sep
+    status_line = status_line .. color.none
+    local diagnostics = get_diagnostics()
+    if diagnostics ~= nil then
+        status_line = status_line .. ' ' .. diagnostics .. ' '
     end
-    local branch = getBranch()
+    local branch = get_branch()
     if branch ~= nil then
-        statusLine = statusLine .. ' ' .. branch .. ' '
+        if diagnostics ~= nil then
+            status_line = status_line .. icons.right_hollow_sep
+        end
+        status_line = status_line .. ' ' .. branch .. ' '
     end
-    statusLine = statusLine .. '%='
-    statusLine = statusLine .. ' ' .. getEncoding() .. ' '
-    statusLine = statusLine .. icons.leftHollowSep
-    statusLine = statusLine .. ' ' .. getFileType() .. ' '
-    statusLine = statusLine .. icons.leftHollowSep
-    statusLine = statusLine .. ' %p%% '
-    statusLine = statusLine .. color.blueSep
-    statusLine = statusLine .. icons.leftFullSep
-    statusLine = statusLine .. color.blue
-    statusLine = statusLine .. ' %l:%c '
+    status_line = status_line .. '%='
+    status_line = status_line .. ' ' .. get_file_type() .. ' '
+    status_line = status_line .. icons.left_hollow_sep
+    status_line = status_line .. ' ' .. get_encoding() .. ' '
+    status_line = status_line .. icons.left_hollow_sep
+    status_line = status_line .. ' %p%% '
+    status_line = status_line .. color.blue_sep
+    status_line = status_line .. icons.left_full_sep
+    status_line = status_line .. color.blue
+    status_line = status_line .. ' %l:%c '
 
-    return statusLine
+    return status_line
 end
-opt.statusline = '%{%luaeval("getStatusLine()")%}'
+opt.statusline = '%{%luaeval("get_status_line()")%}'

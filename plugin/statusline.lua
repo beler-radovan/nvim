@@ -50,9 +50,6 @@ local icons = {
     rightHollowSep = '',
     leftFullSep = '',
     leftHollowSep = '',
-    error = '',
-    warning = '',
-    info = '',
 }
 
 local function setHighlight(groupName, fg, bg)
@@ -104,10 +101,14 @@ local function getDiagnostics()
     return diagnostics
 end
 
+local function lspClientAttached()
+    local numberOfClients = #vim.lsp.get_active_clients(0)
+    return numberOfClients > 0
+end
+
 local function getBranch()
     return 'master'
 end
-
 
 function getStatusLine()
     local color = getColor()
@@ -118,8 +119,12 @@ function getStatusLine()
     statusLine = statusLine .. color.blueSep
     statusLine = statusLine .. icons.rightFullSep
     statusLine = statusLine .. color.none
-    statusLine = statusLine .. ' ' .. getDiagnostics() .. ' '
-    statusLine = statusLine .. icons.rightHollowSep
+    -- print LSP diagnostics if at least one LSP client is attached
+    -- to the current buffer
+    if lspClientAttached() then
+        statusLine = statusLine .. ' ' .. getDiagnostics() .. ' '
+        statusLine = statusLine .. icons.rightHollowSep
+    end
     statusLine = statusLine .. ' ' .. getBranch() .. ' '
     statusLine = statusLine .. '%='
     statusLine = statusLine .. ' ' .. getEncoding() .. ' '
@@ -131,7 +136,7 @@ function getStatusLine()
     statusLine = statusLine .. icons.leftFullSep
     statusLine = statusLine .. color.blue
     statusLine = statusLine .. ' %l:%c '
+
     return statusLine
 end
-
 opt.statusline = '%{%luaeval("getStatusLine()")%}'

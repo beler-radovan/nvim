@@ -74,4 +74,8 @@ return {
     ),
     -- Frequently used functions
     s("print", fmt("print({})", i(1))),
+
+    -- Frequently used statements
+    s("eq", fmt("{}", t("== nil"))),
+    s("ne", fmt("{}", t("~= nil"))),
 }

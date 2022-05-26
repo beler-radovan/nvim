@@ -89,10 +89,10 @@ local function getEncoding()
 end
 
 local function getDiagnostics()
-	local errors = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
-	local warnings = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
-	local hints = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
-	local info = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
+    local errors = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+    local warnings = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+    local hints = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
+    local info = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
     local diagnostics = ''
     diagnostics = diagnostics .. 'E:' .. #errors
     diagnostics = diagnostics .. ' W:' .. #warnings
@@ -106,8 +106,30 @@ local function lspClientAttached()
     return numberOfClients > 0
 end
 
+
 local function getBranch()
-    return 'master'
+    -- redirect output from stderr to stdout, because popen reads output
+    -- only from stdout
+    local output = io.popen("git branch 2>&1", "r")
+    if output == nil then
+        return nil
+    end
+
+    local match = ''
+    for line in output:lines() do
+        match = string.match(line, "^fatal:")
+        if match then
+            return nil
+        end
+
+        match = string.match(line, "^*")
+        if match then
+            local branch = string.match(line, "%g+$")
+            return branch
+        end
+    end
+
+    return nil
 end
 
 function getStatusLine()
@@ -125,7 +147,10 @@ function getStatusLine()
         statusLine = statusLine .. ' ' .. getDiagnostics() .. ' '
         statusLine = statusLine .. icons.rightHollowSep
     end
-    statusLine = statusLine .. ' ' .. getBranch() .. ' '
+    local branch = getBranch()
+    if branch ~= nil then
+        statusLine = statusLine .. ' ' .. branch .. ' '
+    end
     statusLine = statusLine .. '%='
     statusLine = statusLine .. ' ' .. getEncoding() .. ' '
     statusLine = statusLine .. icons.leftHollowSep

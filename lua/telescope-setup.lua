@@ -26,10 +26,14 @@ require('telescope').setup{
         --   extension_config_key = value,
         -- }
         -- please take a look at the readme of the extension you want to configure
+        file_browser = {
+            hijack_netrw = false,
+        }
     }
 }
 
 require('telescope').load_extension('fzf')
+require("telescope").load_extension("file_browser")
 
 -- Telescope keymaps
 local map = vim.keymap.set
@@ -39,4 +43,6 @@ map("n", ",ff", ":Telescope find_files<CR>", opts)
 map("n", ",f/", ":Telescope live_grep<CR>", opts)
 map("n", ",fc", ":Telescope git_commits<CR>", opts)
 map("n", ",fb", ":Telescope git_bcommits<CR>", opts)
+map("n", ",fs", ":Telescope git_status<CR>", opts)
 map("n", ",fh", ":Telescope help_tags<CR>", opts)
+map("n", ",fe", ":Telescope file_browser<CR>", opts)

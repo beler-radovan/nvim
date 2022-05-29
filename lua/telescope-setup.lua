@@ -39,10 +39,10 @@ require("telescope").load_extension("file_browser")
 local map = vim.keymap.set
 local opts = {silent = true, remap = false}
 
-map("n", ",ff", ":Telescope find_files<CR>", opts)
-map("n", ",f/", ":Telescope live_grep<CR>", opts)
-map("n", ",fc", ":Telescope git_commits<CR>", opts)
-map("n", ",fb", ":Telescope git_bcommits<CR>", opts)
-map("n", ",fs", ":Telescope git_status<CR>", opts)
-map("n", ",fh", ":Telescope help_tags<CR>", opts)
-map("n", ",fe", ":Telescope file_browser<CR>", opts)
+map("n", "<leader>ff", ":Telescope find_files<CR>", opts)
+map("n", "<leader>f/", ":Telescope live_grep<CR>", opts)
+map("n", "<leader>fc", ":Telescope git_commits<CR>", opts)
+map("n", "<leader>fb", ":Telescope git_bcommits<CR>", opts)
+map("n", "<leader>fs", ":Telescope git_status<CR>", opts)
+map("n", "<leader>fh", ":Telescope help_tags<CR>", opts)
+map("n", "<leader>fe", ":Telescope file_browser<CR>", opts)

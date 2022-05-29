@@ -38,3 +38,10 @@ map('n', '<c-p>', ':tabprev<CR>', opts)
 function P(args)
     print(vim.inspect(args))
 end
+-- Abbreviated vim-fugive commands
+local api = vim.api
+api.nvim_create_user_command("Gs", "Git status", {})
+api.nvim_create_user_command("Ga", "Git add", {})
+api.nvim_create_user_command("Gc", "Git commit", {})
+api.nvim_create_user_command("Gp", "Git commit", {})
+api.nvim_create_user_command("Gl", "Git commit", {})

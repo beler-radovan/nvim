@@ -32,6 +32,8 @@ return require('packer').startup(function()
         }
     }
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    -- Git
+    use 'tpope/vim-fugitive'
     -- My own plugins
     use '/home/rabakel/Projects/plugins/tofloat'
 end)

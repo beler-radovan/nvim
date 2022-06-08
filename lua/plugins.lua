@@ -36,4 +36,5 @@ return require('packer').startup(function()
     use 'tpope/vim-fugitive'
     -- My own plugins
     use '/home/rabakel/Projects/plugins/tofloat'
+    use '/home/rabakel/Projects/plugins/mdim'
 end)

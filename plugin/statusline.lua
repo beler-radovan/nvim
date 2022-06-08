@@ -73,10 +73,10 @@ end
 
 local function get_file_type()
     local file_type = vim.bo.filetype
-    if file_type == '' then
-        return 'TEXT'
+    if file_type == "" then
+        return "text"
     else
-        return '%Y'
+        return file_type
     end
 end
 

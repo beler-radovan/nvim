@@ -15,20 +15,22 @@ return {
         {i(1), i(2)})
     ),
     s("fn", fmt(table.concat({
-        "{}function {}({})\n",
+        "{} = function({})\n",
         "    {}\n",
         "end{}"}),
-        {c(1, {t"local ", t""}), i(2), i(3), i(4), i(5)})
+        {i(1), i(2), i(3), i(4)})
+    ),
+    s("lf", fmt(table.concat({
+        "local {} = function({})\n",
+        "    {}\n",
+        "end{}"}),
+        {i(1), i(2), i(3), i(4)})
     ),
     s("ta", fmt(table.concat({
         "{}{} = {{\n",
         "    {}\n",
         "}}{}"}),
         {c(1, {t"local ", t""}), i(2), i(3), i(4)})
-    ),
-    s("as", fmt(table.concat({
-        "{}{} = {}\n"}),
-        {c(1, {t"local ", t""}), i(2), i(3)})
     ),
     s("if", fmt(table.concat({
         "if {} then\n",
@@ -78,4 +80,5 @@ return {
     -- Frequently used statements
     s("en", fmt("{}", t("== nil"))),
     s("nn", fmt("{}", t("~= nil"))),
+    s("loc", fmt("local {} = {}", { i(1), i(2) })),
 }

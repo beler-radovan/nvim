@@ -35,13 +35,36 @@ map('n', '<leader>c', ':tabclose<CR>', opts)
 map('n', '<c-n>', ':tabnext<CR>', opts)
 map('n', '<c-p>', ':tabprev<CR>', opts)
 
+local api = vim.api
+
 -- Handy functions
-function P(args)
+P = function(args)
     print(vim.inspect(args))
 end
 
+local create_new_file = function(input)
+    local path = vim.fn.expand("%:p")
+    local file_name = vim.fn.expand("%:t")
+    local extension = vim.fn.expand("%:e")
+    -- Remove file extension
+    file_name = string.gsub(file_name, "%." .. extension, "")
+    local new_file = string.gsub(path, file_name, input)
+
+    vim.cmd("tabnew " .. new_file)
+end
+
+-- Create a new file with the same filetype as the current file and open it in a
+-- new tab
+NewFile = function()
+    vim.ui.input({ prompt = "New file name: " }, function(input)
+        create_new_file(input)
+    end)
+end
+
+-- Custom commands
+api.nvim_create_user_command("NF", NewFile, {})
+
 -- Abbreviated vim-fugive commands
-local api = vim.api
 api.nvim_create_user_command("Gs", "Git status", {})
 api.nvim_create_user_command("Ga", "Git add", {})
 api.nvim_create_user_command("Gc", "Git commit", {})

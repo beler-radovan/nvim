@@ -34,6 +34,13 @@ return require('packer').startup(function()
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     -- Git
     use 'tpope/vim-fugitive'
+    -- Neorg
+    use {
+        "nvim-neorg/neorg",
+        requires = "nvim-lua/plenary.nvim"
+    }
+    -- Misc
+    use 'junegunn/goyo.vim'
     -- My own plugins
     use '/home/rabakel/Projects/plugins/tofloat'
     use '/home/rabakel/Projects/plugins/mdim'

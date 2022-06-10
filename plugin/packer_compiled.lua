@@ -104,10 +104,20 @@ _G.packer_plugins = {
     path = "/home/rabakel/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["goyo.vim"] = {
+    loaded = true,
+    path = "/home/rabakel/.local/share/nvim/site/pack/packer/start/goyo.vim",
+    url = "https://github.com/junegunn/goyo.vim"
+  },
   mdim = {
     loaded = true,
     path = "/home/rabakel/.local/share/nvim/site/pack/packer/start/mdim",
     url = "/home/rabakel/Projects/plugins/mdim"
+  },
+  neorg = {
+    loaded = true,
+    path = "/home/rabakel/.local/share/nvim/site/pack/packer/start/neorg",
+    url = "https://github.com/nvim-neorg/neorg"
   },
   ["nvim-cmp"] = {
     loaded = true,

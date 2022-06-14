@@ -19,7 +19,7 @@ set.showtabline = 2
 local opts = {silent = true, remap = false}
 local map = vim.keymap.set
 
-vim.g.mapleader = ","
+vim.g.mapleader = " "
 
 map('n', '<leader>s', ':w<CR>', opts)
 map('n', '<leader>q', ':wq<CR>', opts)

@@ -14,6 +14,7 @@ return require('packer').startup(function()
     use 'L3MON4D3/LuaSnip'
     -- LSP
     use 'neovim/nvim-lspconfig'
+    use 'mfussenegger/nvim-jdtls'
     -- Completion
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-buffer'

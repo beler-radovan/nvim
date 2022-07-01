@@ -43,6 +43,6 @@ return require('packer').startup(function()
     -- Misc
     use 'junegunn/goyo.vim'
     -- My own plugins
-    use '/home/rabakel/Projects/plugins/tofloat'
-    use '/home/rabakel/Projects/plugins/mdim'
+--    use '/home/rabakel/Projects/plugins/tofloat'
+--    use '/home/rabakel/Projects/plugins/mdim'
 end)
